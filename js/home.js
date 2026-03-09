@@ -130,3 +130,14 @@ const displayModal = (issue) => {
         </div>
     `;
 }
+
+const loadSearchData = (search) => {
+    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${search}`)
+        .then(res => res.json())
+        .then(data => displayData(data.data))
+}
+document.getElementById('searchBtn').addEventListener('click', function () {
+    const searchValue = document.getElementById('searchField').value;
+    document.getElementById('card-container').innerHTML = ``;
+    loadSearchData(searchValue);
+})
