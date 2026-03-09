@@ -80,13 +80,15 @@
     <div id="spinner" class="flex justify-center my-10 hidden">
         <span class="loading loading-bars loading-lg"></span>
     </div>
-    <div id="card-container" class="w-11/12 md:w-10/12 mx-auto grid grid-cols-1 md:grid-cols-3 gap-3 lg:grid-cols-4">
-
-    </div>
-    <div id="open-card-container"
+    <div onclick="my_modal_5.showModal()" id="card-container"
         class="w-11/12 md:w-10/12 mx-auto grid grid-cols-1 md:grid-cols-3 gap-3 lg:grid-cols-4">
 
     </div>
+
+    <!-- Open the modal using ID.showModal() method -->
+    <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+
+    </dialog>
 </body>
 
 <script src="js/utilities.js"></script>

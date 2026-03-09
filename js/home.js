@@ -23,7 +23,7 @@ const displayData = (issues) => {
                 <div>
                 ${issue.status === "open" ? `<i class="fa-solid fa-arrows-spin text-[#00A96E] bg-[#CBFADB] p-1 rounded-full"></i>` : `<i class="fa-regular fa-circle-check text-[#A855F7] bg-[#F0E2FF] p-1 rounded-full"></i>`}    
                 </div>
-                <div class="${issue.priority === "high" ? `bg-[#FEECEC] text-[#EF4444]` : issue.priority === "medium" ? `bg-[#FFF6D1] text-[#F59E0B]` : `bg-[#EEEFF2] text-[#9CA3AF]`}
+                <div onclick="showModal(${issue.id})" class="${issue.priority === "high" ? `bg-[#FEECEC] text-[#EF4444]` : issue.priority === "medium" ? `bg-[#FFF6D1] text-[#F59E0B]` : `bg-[#EEEFF2] text-[#9CA3AF]`}
                 px-5 rounded-full">${issue.priority}</div>
             </div>
             <h4 class="text-sm font-semibold">${issue.title}</h4>
@@ -84,3 +84,49 @@ document.getElementById('closed-btn').addEventListener('click', function () {
             spinnerContainer.classList.add('hidden');
         })
 })
+
+const showModal = (id) => {
+    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`)
+        .then(res => res.json())
+        .then(data => displayModal(data.data))
+}
+const displayModal = (issue) => {
+    const modalContainer = document.getElementById('my_modal_5');
+    modalContainer.innerHTML = `
+        <div class="modal-box">
+            <h3 class="text-lg font-bold mb-2">${issue.title}</h3>
+            <span class="py-1 px-3 bg-success rounded-full text-sm text-white font-semibold mb-3">${issue.status}</span>
+            <div class = "flex gap-3 my-3">
+                <div class="${issue.labels[0] === "bug" ? `bg-[#FEECEC]` : issue.labels[0] === "enhancement" ? `bg-[#DEFCE8]` : `bg-blue-100`} py-1 px-3 rounded-full flex gap-2 items-center flex-wrap">
+                ${issue.labels[0] === "bug" ? `<i class="fa-solid fa-bug text-[#EF4444]"></i><span
+                        class="text-error text-xs">${issue.labels[0]}</span>` : issue.labels[0] === "enhancement" ? `<i class="fa-solid fa-ticket text-[#00A96E]"></i><span
+                        class="text-[#00A96E] text-xs">${issue.labels[0]}</span>` : `<i class="fa-regular fa-book-medical text-info"></i><span
+                        class="text-info text-xs">${issue.labels[0]}</span>`}
+                </div>
+                <div class="bg-[#FFF8D8] py-1 px-3 rounded-full flex gap-2 ${issue.labels[1] ? `` : `invisible`}"><i class="fa-solid fa-circle-radiation text-[#D97706]"></i>
+                    <span class="text-[#D97706] text-xs">
+                        ${issue.labels[1]}</span>
+                </div>
+            </div>
+            <p class="py-2 text-sm text-[#64748B]">${issue.description}</p>
+            <div class="grid grid-cols-2 bg-[#F8FAFC] p-2 rounded">
+                <div>
+                    <p class="text-sm font-semibold">Assignee: </p>
+                    <p class ="text-sm text-[#64748B]">${issue.assignee}</p>
+                </div>
+                <div>
+                    <p class="text-sm font-semibold">Priority: </p>
+                    <span class="${issue.priority === "high" ? `bg-[#FEECEC] text-[#EF4444]` : issue.priority === "medium" ? `bg-[#FFF6D1] text-[#F59E0B]` : `bg-[#EEEFF2] text-[#9CA3AF]`}
+                px-3 rounded-full">${issue.priority}</span>
+                </div>
+            </div>
+            <p class="py-4">Press ESC key or click the button below to close</p>
+            <div class="modal-action">
+                <form method="dialog">
+                    <!-- if there is a button in form, it will close the modal -->
+                    <button class="btn btn-primary">Close</button>
+                </form>
+            </div>
+        </div>
+    `;
+}
