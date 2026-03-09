@@ -22,7 +22,7 @@
 
 <body>
     <!--Navbar-->
-    <div class="navbar bg-base-100 shadow-sm">
+    <div class="navbar bg-base-100 shadow-sm mb-10">
         <div class="navbar-start">
             <div class="dropdown">
                 <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
@@ -44,7 +44,8 @@
                     <input type="search" required placeholder="Search" />
                 </label>
             </div>
-            <a class="btn btn-ghost text-xl">daisyUI</a>
+            <a class="btn btn-ghost text-xl"><i class="fa-brands fa-github"></i> <span
+                    class="text-base md:text-2xl font-semibold">GitHub Issues Tracker</span></a>
         </div>
         <div class="navbar-end space-x-3">
             <label class="menu input hidden md:flex items-center">
@@ -62,7 +63,33 @@
     </div>
     <!--Navbar-->
 
+    <div class="w-11/12 md:w-10/12 mx-auto mb-10">
+        <button id="all-btn" class="btn btn-success">All</button>
+        <button class="btn">Open</button>
+        <button class="btn">Closed</button>
+    </div>
+    <div class="w-11/12 md:w-10/12 mx-auto flex justify-between items-center pb-2 border-b border-b-slate-200 mb-5">
+        <div class="flex gap-2">
+            <div class="flex items-center bg-[#ECE4FF] p-1 rounded-full"><img src="assets/Aperture.png" alt=""></div>
+            <div>
+                <h4 class="text-xl font-semibold"><span>50</span> Issues</h4>
+                <p class="text-[#64748B]">Track and manage your project issues</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-2">
+            <div aria-label="success" class="status status-success">
 
+            </div> Open
+            <div aria-label="status" class="status status-primary"></div> Closed
+        </div>
+    </div>
+    <!--Card Container-->
+    <div id="card-container" class="w-11/12 md:w-10/12 mx-auto grid grid-cols-1 md:grid-cols-3 gap-3 lg:grid-cols-4">
+
+    </div>
 </body>
+
+<script src="js/utilities.js"></script>
+<script src="js/home.js"></script>
 
 </html>
