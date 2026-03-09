@@ -1,12 +1,8 @@
-const priorityValidation = (data, id) => {
-    const container = document.getElementById(id);
-    if (data === "high") {
-        container.classList.add('bg-[#FEECEC]', 'text-[#EF4444]');
+const handleActiveBtn = (id) => {
+    const allBtn = document.querySelectorAll('.btn');
+    for (const btn of allBtn) {
+        btn.classList.remove('btn-success');
     }
-    else if (data === "medium") {
-        container.classList.add('bg-[#FFF6D1]', 'text-[#F59E0B]');
-    }
-    else {
-        container.classList.add('bg-[#EEEFF2]', 'text-[#9CA3AF]')
-    }
+    const activeBtn = document.getElementById(id);
+    activeBtn.classList.add('btn-success');
 }
